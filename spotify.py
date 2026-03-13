@@ -3,6 +3,7 @@ import getpass
 import time
 
 def criar():
+    print('teste')
     print('Vamos criar sua conta:')
     print('-'*50)
     time.sleep(1)
