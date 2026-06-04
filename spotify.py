@@ -272,7 +272,6 @@ def musicas():
                     total=converter(tempo)
                     print(f'Tocando: {musica_nome}')
                     playsound.playsound(arq)
-                    time.sleep(total)
                     return menu()
             if achou==False:
                 print('Artista não encontrado')
