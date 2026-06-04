@@ -267,6 +267,7 @@ def musicas():
                 musica_nome=linha.split(',')[0].strip()
                 if tocar==musica_nome:
                     arq=linha.split('/')[1].strip()
+                    arq = f"musicas/{arq}"
                     tempo=linha.split(',')[1].split(';')[0].strip()
                     total=converter(tempo)
                     print(f'Tocando: {musica_nome}')
