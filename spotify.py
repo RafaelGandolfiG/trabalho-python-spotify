@@ -1,6 +1,15 @@
 from datetime import date
 import getpass
 import time
+import playsound
+
+def converter(tempo):
+    parte1=tempo.split(':')[0]
+    parte1=int(parte1)
+    parte2=tempo.split(':')[1]
+    parte2=int(parte2)
+    total=(parte1*60)+parte2
+    return total
 
 def criar():
     print('Vamos criar sua conta:')
@@ -229,7 +238,7 @@ def musicas():
                 lista=arquivo.readlines()
             artistas=set()
             for linha in lista:
-                nome = linha.split(';')[1].strip()
+                nome = linha.split(';')[1].split('/')[0].strip()
                 artistas.add(nome)
             print('-'*50)
             print('Artistas cadastrados:')
@@ -243,12 +252,27 @@ def musicas():
             print('-'*50)
             for linha in lista:
                 musica=linha.split(';')[0]
-                artista=linha.split(';')[1].strip().lower()
+                artista=linha.split(';')[1].strip().lower().split('/')[0]
+                tempo=linha.split(',')[1].split(';')[0]
+                musica_nome=linha.split(',')[0]
+                arq=linha.split('/')[1]
+                total=converter(tempo)
                 if artista==artista_escolhido:
                     print(musica)
                     time.sleep(0.5)
                     achou=True
             print('-'*50)
+            tocar=input('Quer tocar qual musica? ')
+            for linha in lista:
+                musica_nome=linha.split(',')[0].strip()
+                if tocar==musica_nome:
+                    arq=linha.split('/')[1].strip()
+                    tempo=linha.split(',')[1].split(';')[0].strip()
+                    total=converter(tempo)
+                    print(f'Tocando: {musica_nome}')
+                    playsound.playsound(arq)
+                    time.sleep(total)
+                    return menu()
             if achou==False:
                 print('Artista não encontrado')
             time.sleep(1)
